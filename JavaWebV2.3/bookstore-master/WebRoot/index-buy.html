@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="Probably the most complete UI kit out there. Multiple functionalities and controls added,  extended color palette and beautiful typography, designed as its own extended version of Bootstrap at  the highest level of quality.                             ">
+      <meta name="author" content="Webpixels">
+
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <title>这 里 是 书 城 驿 站</title>
+      <script src="./lib/jquery/jquery.min.js"></script>
+      <script src="./lib/bookstore/bookBuy.js"></script>
+
+      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+      <link rel="stylesheet" type="text/css" href="css/style.css" />
+      <!-- Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800|Roboto:400,500,700" rel="stylesheet">
+      <!-- Theme CSS -->
+      <link type="text/css" href="./assets/css/theme.css" rel="stylesheet">
+      <!-- Demo CSS - No need to use these in your project -->
+      <link type="text/css" href="./assets/css/demo.css" rel="stylesheet">
+      <style>
+          * {
+              margin: 0;
+              padding: 0;
+          }
+
+          body {
+              background-color: #e2dfdf;
+          }
+
+          ul,
+          li {
+              list-style-type: none;
+          }
+
+          input {
+              background: none;
+              outline: none;
+              border: 0px;
+              width: 40px;
+              padding-left: 30px;
+          }
+
+          #app {
+              width: 1200px;
+              margin: 100px auto;
+          }
+
+          #shop-title {
+              width: 100%;
+              border-bottom: 3px solid #f5f5f5;
+          }
+
+          #shop-title ul {
+              width: 100%;
+              display: flex;
+              background-color: rgb(252, 252, 252);
+          }
+
+          #shop-title ul li {
+              flex: 0 0 15%;
+              text-align: center;
+              height: 50px;
+              line-height: 50px;
+
+          }
+
+          #shop-title ul li:nth-child(1) {
+              text-align: left;
+              padding-left: 20px;
+          }
+
+          #shop-title ul li:nth-child(2) {
+              text-align: left;
+              flex: 0 0 30%;
+          }
+
+          #shop-title ul li:nth-child(3) {
+              flex: 0 0 10%;
+          }
+
+          #shop-list {
+              width: 100%;
+          }
+
+          #shop-list ul {
+              width: 100%;
+              display: flex;
+              background-color: rgb(252, 252, 252);
+              justify-content: center;
+              align-items: center;
+              border-bottom: 3px solid #f5f5f5;
+          }
+
+          #shop-list ul li {
+              text-align: center;
+              flex: 0 0 15%;
+          }
+
+          #shop-list ul li a {
+              display: inline-block;
+              text-decoration: none;
+              text-align: center;
+              color: black;
+              width: 20px;
+          }
+
+          a:hover {
+              background-color: #aeaaaa;
+          }
+
+          #shop-list ul li:nth-child(1) {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+          }
+
+          #shop-list ul li:nth-child(1) div:nth-child(1) {
+              padding-left: 35px;
+          }
+
+          #shop-list ul li:nth-child(1) div:nth-child(2) {
+              width: 90px;
+              height: 90px;
+          }
+
+          #shop-list ul li:nth-child(1) div:nth-child(2) img {
+              width: 100%;
+              height: 100%;
+          }
+
+          #shop-list ul li:nth-child(2) {
+              text-align: left;
+              flex: 0 0 30%;
+              margin-left: 30px;
+          }
+
+          #shop-list ul li:nth-child(3) {
+              flex: 0 0 10%;
+          }
+
+          #shop-list ul li:nth-child(5) span {
+              color: #ff6702;
+          }
+
+          input[type=checkbox] {
+              cursor: pointer;
+              position: relative;
+              width: 16px;
+              height: 16px;
+              font-size: 14px;
+              margin-right: 8px;
+          }
+
+          input[type=checkbox]::after {
+              position: absolute;
+              top: 0;
+              /* 修改默认背景色 */
+              background-color: #ff6702;
+              border: 1px solid #aaaaaa;
+              /* 修改默认对勾颜色 */
+              color: #f3f7f6;
+              width: 16px;
+              height: 16px;
+              display: inline-block;
+              visibility: visible;
+              text-align: center;
+              content: ' ';
+
+          }
+
+          #footBox {
+              width: 100%;
+              height: 40px;
+              position: relative;
+              background-color: rgb(252, 252, 252);
+
+          }
+
+          #footBox div {
+              position: absolute;
+              height: 40px;
+              line-height: 40px;
+          }
+
+          #footBox div:nth-child(1) {
+              font-size: 12px;
+              left: 30px;
+          }
+
+          #footBox div:nth-child(2) {
+              left: 140px;
+              font-size: 12px;
+          }
+
+          #footBox div:nth-child(3) {
+              right: 270px;
+              font-size: 12px;
+          }
+
+          #footBox div:nth-child(3) span {
+              color: #ff6702;
+              font-size: 18px;
+          }
+
+          #footBox div:nth-child(4) {
+              right: 0px;
+              width: 200px;
+              background-color: #ff6702;
+              text-align: center;
+              color: aliceblue;
+              font-size: 14px;
+          }
+
+          input[type=checkbox]:checked::after {
+              content: "√";
+              font-size: 16px;
+              font-weight: bold;
+          }
+      </style>
+  </head>
+  <body>
+  <section class="spotlight parallax bg-cover bg-size--cover" style="background-color: #e8f2ff">
+      <div class="container">
+          <h2 class="heading h3 strong-600 text-center mb-5">
+              这 里 是 你 的 书 籍 驿 站~
+          </h2>
+          <div class="row-wrapper">
+              <div id="app">
+                  <div id="shop">
+                      <div id="shop-title">
+                          <ul>
+                              <li><input type="checkbox" v-model="checkAll">全选</li>
+                              <li>商品名称</li>
+                              <li>单价</li>
+                              <li>数量</li>
+                              <li>小计</li>
+                              <li>操作</li>
+                          </ul>
+                      </div>
+                      <div id="shop-list">
+                          <ul v-for="p in list">
+                              <li>
+                                  <div>
+                                      <input type="checkbox" v-model="p.check">
+                                  </div>
+                                  <div>
+                                      <img :src="p.img" alt="">
+                                  </div>
+
+                              </li>
+                              <li>
+                                  <p>{{p.shopname}}</p>
+                              </li>
+                              <li><span>{{p.price}}元</span></li>
+                              <li>
+                                  <div>
+                                      <a href="javascript:;" @click="decrease(p)">-</a>
+                                      <input type="number" min="0" max="10" v-model="p.num">
+                                      <a href="javascript:;" @click="add(p)">+</a>
+                                  </div>
+                              </li>
+                              <li><span>{{p.totle}}元</span></li>
+                              <li><a href="javascript:;" @click="dlt(p)">✖</a></li>
+                          </ul>
+                      </div>
+<!--                      <div id="footBox">-->
+<!--                          <div>继续购物</div>-->
+<!--                          <div>已选择<span>{{TotalPrice.index}}</span>件</div>-->
+<!--                          <div>合计:<span>{{TotalPrice.sum}}</span>元</div>-->
+<!--                          <div>去结算</div>-->
+<!--                      </div>-->
+                      <section class="slice pt-0 sct-color-1">
+                          <div class="container">
+                              <div class="row justify-content-center align-items-center">
+                                  <div class="col-lg-8 text-center">
+                                      <h3 class="heading h3 font-weight-400">
+                                              你 选 的 书 籍 价 格 共 为 <span class="font-weight-700">{{TotalPrice.sum}}元</span>
+                                      </h3>
+                                      <div class="mt-5">
+                                          <a href="" class="btn btn-lg btn-primary px-4">
+                                              立 刻 下 单
+                                          </a>
+                                          <a href="" target="" class="btn btn-link">再 等 等</a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </section>
+                  </div>
+              </div>
+<!--              <div class="row cols-xs-space cols-sm-space cols-md-space">-->
+<!--                  <div class="col-md-6">-->
+<!--                      <div class="card bg-primary">-->
+<!--                          <div class="card-body py-5">-->
+<!--                              <div class="d-flex align-items-start">-->
+<!--                                  <img src="./image/upload/0c68e8fb-f4b9-4ae0-a8f7-277f67b08a9e.jpg">-->
+<!--&lt;!&ndash;                                  <div class="icon icon-lg">&ndash;&gt;-->
+<!--&lt;!&ndash;                                      <i class="fab fa-twitter text-white"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                                  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                  <div class="icon-text">&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                      <h3 class="heading text-white h4">Latest Bootstrap framework <small>(v4.0.0)</small></h3>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                      <p class="text-white mb-0">Build responsive, mobile-first projects on the web with the world's most popular front-end component library.</p>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                  </div>&ndash;&gt;-->
+<!--                              </div>-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!--                  </div>-->
+<!--                  <div class="col-md-6">-->
+<!--                      <div class="card">-->
+<!--                          <div class="card-body py-5">-->
+<!--                              <div class="d-flex align-items-start">-->
+<!--                                  <div class="icon icon-lg">-->
+<!--                                      <i class="fab fa-sass"></i>-->
+<!--                                  </div>-->
+<!--                                  <div class="icon-text">-->
+<!--                                      <h3 class="heading h4">Built with Sass <small>(included)</small></h3>-->
+<!--                                      <p class="mb-0">Change one variable and the theme adapts. And there are tones: colors, fonts, sizes are just a few things you can change with Sass.</p>-->
+<!--                                  </div>-->
+<!--                              </div>-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--              <div class="row cols-xs-space cols-sm-space cols-md-space">-->
+<!--                  <div class="col-md-6">-->
+<!--                      <div class="card bg-primary">-->
+<!--                          <div class="card-body py-5">-->
+<!--                              <div class="d-flex align-items-start">-->
+<!--                                  <div class="icon icon-lg">-->
+<!--                                      <i class="fas fa-th-large text-white"></i>-->
+<!--                                  </div>-->
+<!--                                  <div class="icon-text">-->
+<!--                                      <h3 class="heading text-white h4">50 customized components</h3>-->
+<!--                                      <p class="text-white mb-0">We took the most used Bootstrap components and add them a little Boomerang touch with modular elements that makes them reusable and easy to work with.</p>-->
+<!--                                  </div>-->
+<!--                              </div>-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!--                  </div>-->
+<!--                  <div class="col-md-6">-->
+<!--                      <div class="card">-->
+<!--                          <div class="card-body py-5">-->
+<!--                              <div class="d-flex align-items-start">-->
+<!--                                  <div class="icon icon-lg">-->
+<!--                                      <i class="fas fa-tint"></i>-->
+<!--                                  </div>-->
+<!--                                  <div class="icon-text">-->
+<!--                                      <h3 class="heading h4">Extended color palette</h3>-->
+<!--                                      <p class="mb-0">Boomerang has extended the color palette that Bootstrap offers by default. Instead of two primary colors, you get now three. These can be easily customized using the included Sass files.</p>-->
+<!--                                  </div>-->
+<!--                              </div>-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--              <div class="row cols-xs-space cols-sm-space cols-md-space">-->
+<!--                  <div class="col-md-6">-->
+<!--                      <div class="card bg-primary">-->
+<!--                          <div class="card-body py-5">-->
+<!--                              <div class="d-flex align-items-start">-->
+<!--                                  <div class="icon icon-lg">-->
+<!--                                      <i class="fas fa-code text-white"></i>-->
+<!--                                  </div>-->
+<!--                                  <div class="icon-text">-->
+<!--                                      <h3 class="heading text-white h4">Five integrated plugins</h3>-->
+<!--                                      <p class="text-white mb-0">Get even more functionality with the ready to use plugins we have integrated in this theme for you.</p>-->
+<!--                                  </div>-->
+<!--                              </div>-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!--                  </div>-->
+<!--                  <div class="col-md-6">-->
+<!--                      <div class="card">-->
+<!--                          <div class="card-body py-5">-->
+<!--                              <div class="d-flex align-items-start">-->
+<!--                                  <div class="icon icon-lg">-->
+<!--                                      <i class="fas fa-font"></i>-->
+<!--                                  </div>-->
+<!--                                  <div class="icon-text">-->
+<!--                                      <h3 class="heading h4">Font Awesome 5</h3>-->
+<!--                                      <p class="mb-0">1000 Free icons + 1500 Pro icons make FontAwesome one of the most popular vector icons on the web.</p>-->
+<!--                                  </div>-->
+<!--                              </div>-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--              <div class="row cols-xs-space cols-sm-space cols-md-space">-->
+<!--                  <div class="col-md-6">-->
+<!--                      <div class="card bg-primary">-->
+<!--                          <div class="card-body py-5">-->
+<!--                              <div class="d-flex align-items-start">-->
+<!--                                  <div class="icon icon-lg">-->
+<!--                                      <i class="fas fa-file-alt text-white"></i>-->
+<!--                                  </div>-->
+<!--                                  <div class="icon-text">-->
+<!--                                      <h3 class="heading text-white h4">Five example pages</h3>-->
+<!--                                      <p class="text-white mb-0">We took a step further and created a set of 5 pages that makes it the ideal point to start building websites of any kind.</p>-->
+<!--                                  </div>-->
+<!--                              </div>-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!--                  </div>-->
+<!--                  <div class="col-md-6">-->
+<!--                      <div class="card">-->
+<!--                          <div class="card-body py-5">-->
+<!--                              <div class="d-flex align-items-start">-->
+<!--                                  <div class="icon icon-lg">-->
+<!--                                      <i class="fas fa-question-circle"></i>-->
+<!--                                  </div>-->
+<!--                                  <div class="icon-text">-->
+<!--                                      <h3 class="heading h4">Free support on Github</h3>-->
+<!--                                      <p class="mb-0">You get a professional theme and a promise that we will respond to each issue you are having with our theme on Github.</p>-->
+<!--                                  </div>-->
+<!--                              </div>-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!--                  </div>-->
+<!--              </div>-->
+          </div>
+      </div>
+  </section>
+  </body>
+  <footer class="pt-5 pb-3 footer  footer-dark bg-tertiary">
+      <div class="container">
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+      </div>
+  </footer>
+<!--     Core -->
+    <script src="./assets/vendor/jquery/jquery.min.js"></script>
+    <script src="./assets/vendor/popper/popper.min.js"></script>
+    <script src="./assets/js/bootstrap/bootstrap.min.js"></script>
+    <!-- FontAwesome 5 -->
+    <script src="./assets/vendor/fontawesome/js/fontawesome-all.min.js" defer></script>
+    <!-- Page plugins -->
+    <script src="./assets/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="./assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script src="./assets/vendor/input-mask/input-mask.min.js"></script>
+    <script src="./assets/vendor/nouislider/js/nouislider.min.js"></script>
+    <script src="./assets/vendor/textarea-autosize/textarea-autosize.min.js"></script>
+    <!-- Theme JS -->
+    <script src="./assets/js/theme.js"></script>
+      <script>
+          const app = Vue.createApp({
+              data() {
+                  return {
+                      list: [
+                          {
+                              Id: 0,
+                              check: true,
+                              img: './image/upload/0c68e8fb-f4b9-4ae0-a8f7-277f67b08a9e.jpg',
+                              shopname: '人生',
+                              price: 27.2,
+                              num: 1,
+                              totle: 27.2
+                          },
+                          {
+                              Id: 1,
+                              check: false,
+                              img: './image/upload/fe3b1e96-2156-4f70-9285-29b77abe8b8f.jpg',
+                              shopname: '河边的错误',
+                              price: 39.9,
+                              num: 1,
+                              totle: 39.9
+                          },
+                          {
+                              Id: 2,
+                              check: false,
+                              img: './image/upload/4bf113e5-5b0e-485d-8203-7cf277f60713.jpg',
+                              shopname: '望江南',
+                              price:35.4,
+                              num: 1,
+                              totle: 35.4
+                          },
+                          {
+                              Id: 3,
+                              check: true,
+                              img: './image/upload/027b7c9c-25e7-438f-927a-3130f4cd1a3e.jpg',
+                              shopname: '人生海海',
+                              price: 70,
+                              num: 1,
+                              totle: 70
+                          },
+                          {
+                              Id: 4,
+                              check: false,
+                              img: './image/upload/d82abe4f-6068-49a3-b3d6-b657b6670340.jpg',
+                              shopname: '白色巨塔',
+                              price: 70,
+                              num: 1,
+                              totle: 70
+                          },
+                          {
+                              Id: 5,
+                              check: false,
+                              img: './image/upload/d146f3a3-9740-4ba3-9513-a46539d3d4f5.jpg',
+                              shopname: '摆渡人',
+                              price: 37.4,
+                              num: 1,
+                              totle: 37.4
+                          },
+                      ]
+                  }
+              },
+              methods: {
+                  add(p) {
+                      if (p.num < 10) {
+                          p.num++
+                          p.totle = p.price * p.num
+                      }
+
+                  },
+                  decrease(p) {
+                      if (p.num) {
+                          p.num--
+                          p.totle = p.price * p.num
+                      }
+
+                  },
+                  dlt(p) {
+                      for (let i = 0; i < this.list.length; i++) {
+                          if (p.Id == this.list[i].Id) {
+                              this.list.splice(i, 1)
+                          }
+                      }
+
+                  }
+              },
+              computed: {
+                  checkAll: {
+                      set(v) {
+                          this.list.forEach(e => {
+                              e.check = v
+                          })
+                      },
+                      get() {
+                          if (this.list.length) {
+                              return this.list.length == this.list.filter((e) => {
+                                  return e.check == true
+                              }).length
+                          }
+
+                      }
+                  },
+                  TotalPrice() {
+                      let sum = 0.0
+                      let index = 0
+                      this.list.forEach((e) => {
+                          if (e.check) {
+                              sum += e.totle
+                              index += e.num
+                          }
+                      })
+                      return { "sum": sum, "index": index }
+                  }
+              }
+          }).mount("#app")
+      </script>
+  </body>
+</html>

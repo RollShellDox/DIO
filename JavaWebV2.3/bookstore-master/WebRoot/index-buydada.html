@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #e2dfdf;
+        }
+
+        ul,
+        li {
+            list-style-type: none;
+        }
+
+        input {
+            background: none;
+            outline: none;
+            border: 0px;
+            width: 40px;
+            padding-left: 30px;
+        }
+
+        #app {
+            width: 1200px;
+            margin: 100px auto;
+        }
+
+        #shop-title {
+            width: 100%;
+            border-bottom: 3px solid #f5f5f5;
+        }
+
+        #shop-title ul {
+            width: 100%;
+            display: flex;
+            background-color: rgb(252, 252, 252);
+        }
+
+        #shop-title ul li {
+            flex: 0 0 15%;
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+
+        }
+
+        #shop-title ul li:nth-child(1) {
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        #shop-title ul li:nth-child(2) {
+            text-align: left;
+            flex: 0 0 30%;
+        }
+
+        #shop-title ul li:nth-child(3) {
+            flex: 0 0 10%;
+        }
+
+        #shop-list {
+            width: 100%;
+        }
+
+        #shop-list ul {
+            width: 100%;
+            display: flex;
+            background-color: rgb(252, 252, 252);
+            justify-content: center;
+            align-items: center;
+            border-bottom: 3px solid #f5f5f5;
+        }
+
+        #shop-list ul li {
+            text-align: center;
+            flex: 0 0 15%;
+        }
+
+        #shop-list ul li a {
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+            color: black;
+            width: 20px;
+        }
+
+        a:hover {
+            background-color: #aeaaaa;
+        }
+
+        #shop-list ul li:nth-child(1) {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #shop-list ul li:nth-child(1) div:nth-child(1) {
+            padding-left: 35px;
+        }
+
+        #shop-list ul li:nth-child(1) div:nth-child(2) {
+            width: 90px;
+            height: 90px;
+        }
+
+        #shop-list ul li:nth-child(1) div:nth-child(2) img {
+            width: 100%;
+            height: 100%;
+        }
+
+        #shop-list ul li:nth-child(2) {
+            text-align: left;
+            flex: 0 0 30%;
+            margin-left: 30px;
+        }
+
+        #shop-list ul li:nth-child(3) {
+            flex: 0 0 10%;
+        }
+
+        #shop-list ul li:nth-child(5) span {
+            color: #ff6702;
+        }
+
+        input[type=checkbox] {
+            cursor: pointer;
+            position: relative;
+            width: 16px;
+            height: 16px;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+
+        input[type=checkbox]::after {
+            position: absolute;
+            top: 0;
+            /* 修改默认背景色 */
+            background-color: #ff6702;
+            border: 1px solid #aaaaaa;
+            /* 修改默认对勾颜色 */
+            color: #f3f7f6;
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            visibility: visible;
+            text-align: center;
+            content: ' ';
+
+        }
+
+        #footBox {
+            width: 100%;
+            height: 40px;
+            position: relative;
+            background-color: rgb(252, 252, 252);
+
+        }
+
+        #footBox div {
+            position: absolute;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        #footBox div:nth-child(1) {
+            font-size: 12px;
+            left: 30px;
+        }
+
+        #footBox div:nth-child(2) {
+            left: 140px;
+            font-size: 12px;
+        }
+
+        #footBox div:nth-child(3) {
+            right: 270px;
+            font-size: 12px;
+        }
+
+        #footBox div:nth-child(3) span {
+            color: #ff6702;
+            font-size: 18px;
+        }
+
+        #footBox div:nth-child(4) {
+            right: 0px;
+            width: 200px;
+            background-color: #ff6702;
+            text-align: center;
+            color: aliceblue;
+            font-size: 14px;
+        }
+
+        input[type=checkbox]:checked::after {
+            content: "√";
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="shop">
+            <div id="shop-title">
+                <ul>
+                    <li><input type="checkbox" v-model="checkAll">全选</li>
+                    <li>商品名称</li>
+                    <li>单价</li>
+                    <li>数量</li>
+                    <li>小计</li>
+                    <li>操作</li>
+                </ul>
+            </div>
+            <div id="shop-list">
+                <ul v-for="p in list">
+                    <li>
+                        <div>
+                            <input type="checkbox" v-model="p.check">
+                        </div>
+                        <div>
+                            <img :src="p.img" alt="">
+                        </div>
+
+                    </li>
+                    <li>
+                        <p>{{p.shopname}}</p>
+                    </li>
+                    <li><span>{{p.price}}元</span></li>
+                    <li>
+                        <div>
+                            <a href="javascript:;" @click="decrease(p)">-</a>
+                            <input type="number" min="0" max="10" v-model="p.num">
+                            <a href="javascript:;" @click="add(p)">+</a>
+                        </div>
+                    </li>
+                    <li><span>{{p.totle}}元</span></li>
+                    <li><a href="javascript:;" @click="dlt(p)">✖</a></li>
+                </ul>
+            </div>
+            <div id="footBox">
+                <div>继续购物</div>
+                <div>已选择<span>{{TotalPrice.index}}</span>件</div>
+                <div>合计:<span>{{TotalPrice.sum}}</span>元</div>
+                <div>去结算</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    list: [
+                        {
+                            Id: 0,
+                            check: true,
+                            img: './image/upload/0c68e8fb-f4b9-4ae0-a8f7-277f67b08a9e.jpg',
+                            shopname: '小米手环7 夜跃黑',
+                            price: 219,
+                            num: 2,
+                            totle: 438
+                        },
+                        {
+                            Id: 1,
+                            check: false,
+                            img: './image/upload/0c68e8fb-f4b9-4ae0-a8f7-277f67b08a9e.jpg',
+                            shopname: '小米手环7 夜跃黑',
+                            price: 219,
+                            num: 2,
+                            totle: 438
+                        },
+                        {
+                            Id: 2,
+                            check: false,
+                            img: './image/upload/0c68e8fb-f4b9-4ae0-a8f7-277f67b08a9e.jpg',
+                            shopname: '小米手环7 夜跃黑',
+                            price: 219,
+                            num: 4,
+                            totle: 876
+                        }
+                    ]
+                }
+            },
+            methods: {
+                add(p) {
+                    if (p.num < 10) {
+                        p.num++
+                        p.totle = p.price * p.num
+                    }
+
+                },
+                decrease(p) {
+                    if (p.num) {
+                        p.num--
+                        p.totle = p.price * p.num
+                    }
+
+                },
+                dlt(p) {
+                    for (let i = 0; i < this.list.length; i++) {
+                        if (p.Id == this.list[i].Id) {
+                            this.list.splice(i, 1)
+                        }
+                    }
+
+                }
+            },
+            computed: {
+                checkAll: {
+                    set(v) {
+                        this.list.forEach(e => {
+                            e.check = v
+                        })
+                    },
+                    get() {
+                        if (this.list.length) {
+                            return this.list.length == this.list.filter((e) => {
+                                return e.check == true
+                            }).length
+                        }
+
+                    }
+                },
+                TotalPrice() {
+                    let sum = 0
+                    let index = 0
+                    this.list.forEach((e) => {
+                        if (e.check) {
+                            sum += e.totle
+                            index += e.num
+                        }
+                    })
+                    return { "sum": sum, "index": index }
+                }
+            }
+        }).mount("#app")
+    </script>
+</body>
+
+</html>
